@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'DIV LPAR MINUS MUL NUMBER PLUS RPARS : EE : E PLUS TE : E MINUS TE : TT : T MUL FT : T DIV FT : FF : NUMBERF : LPAR E RPAR'
+_lr_signature = 'DIV LPAR MINUS MUL NUMBER PLUS POWER RPARS : EE : E PLUS TE : E MINUS TE : TT : T MUL FT : T DIV FF : F POWER GF : GT : FG : NUMBERG : LPAR E RPAR'
     
-_lr_action_items = {'NUMBER':([0,6,7,8,9,10,],[5,5,5,5,5,5,]),'LPAR':([0,6,7,8,9,10,],[6,6,6,6,6,6,]),'$end':([1,2,3,4,5,12,13,14,15,16,],[0,-1,-4,-7,-8,-2,-3,-5,-6,-9,]),'PLUS':([2,3,4,5,11,12,13,14,15,16,],[7,-4,-7,-8,7,-2,-3,-5,-6,-9,]),'MINUS':([2,3,4,5,11,12,13,14,15,16,],[8,-4,-7,-8,8,-2,-3,-5,-6,-9,]),'RPAR':([3,4,5,11,12,13,14,15,16,],[-4,-7,-8,16,-2,-3,-5,-6,-9,]),'MUL':([3,4,5,12,13,14,15,16,],[9,-7,-8,9,9,-5,-6,-9,]),'DIV':([3,4,5,12,13,14,15,16,],[10,-7,-8,10,10,-5,-6,-9,]),}
+_lr_action_items = {'NUMBER':([0,7,8,9,10,11,12,],[6,6,6,6,6,6,6,]),'LPAR':([0,7,8,9,10,11,12,],[7,7,7,7,7,7,7,]),'$end':([1,2,3,4,5,6,14,15,16,17,18,19,],[0,-1,-4,-9,-8,-10,-2,-3,-5,-6,-7,-11,]),'PLUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[8,-4,-9,-8,-10,8,-2,-3,-5,-6,-7,-11,]),'MINUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[9,-4,-9,-8,-10,9,-2,-3,-5,-6,-7,-11,]),'RPAR':([3,4,5,6,13,14,15,16,17,18,19,],[-4,-9,-8,-10,19,-2,-3,-5,-6,-7,-11,]),'MUL':([3,4,5,6,14,15,16,17,18,19,],[10,-9,-8,-10,10,10,-5,-6,-7,-11,]),'DIV':([3,4,5,6,14,15,16,17,18,19,],[11,-9,-8,-10,11,11,-5,-6,-7,-11,]),'POWER':([4,5,6,16,17,18,19,],[12,-8,-10,12,12,-7,-11,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'S':([0,],[1,]),'E':([0,6,],[2,11,]),'T':([0,6,7,8,],[3,3,12,13,]),'F':([0,6,7,8,9,10,],[4,4,4,4,14,15,]),}
+_lr_goto_items = {'S':([0,],[1,]),'E':([0,7,],[2,13,]),'T':([0,7,8,9,],[3,3,14,15,]),'F':([0,7,8,9,10,11,],[4,4,4,4,16,17,]),'G':([0,7,8,9,10,11,12,],[5,5,5,5,5,5,18,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,13 +27,15 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> S","S'",1,None,None,None),
-  ('S -> E','S',1,'p_S','power_plus_minus_multiply_devide.py',18),
-  ('E -> E PLUS T','E',3,'p_E_plus_T','power_plus_minus_multiply_devide.py',21),
-  ('E -> E MINUS T','E',3,'p_E_MINUS_T','power_plus_minus_multiply_devide.py',25),
-  ('E -> T','E',1,'p_E_T','power_plus_minus_multiply_devide.py',29),
-  ('T -> T MUL F','T',3,'p_T_MUL_F','power_plus_minus_multiply_devide.py',33),
-  ('T -> T DIV F','T',3,'p_T_DIV_F','power_plus_minus_multiply_devide.py',37),
-  ('T -> F','T',1,'p_T_F','power_plus_minus_multiply_devide.py',42),
-  ('F -> NUMBER','F',1,'p_F_a','power_plus_minus_multiply_devide.py',46),
-  ('F -> LPAR E RPAR','F',3,'p_F_lpar_E_rpar','power_plus_minus_multiply_devide.py',50),
+  ('S -> E','S',1,'p_S','power_plus_minus_multiply_devide.py',20),
+  ('E -> E PLUS T','E',3,'p_E_plus_T','power_plus_minus_multiply_devide.py',23),
+  ('E -> E MINUS T','E',3,'p_E_MINUS_T','power_plus_minus_multiply_devide.py',27),
+  ('E -> T','E',1,'p_E_T','power_plus_minus_multiply_devide.py',31),
+  ('T -> T MUL F','T',3,'p_T_MUL_F','power_plus_minus_multiply_devide.py',35),
+  ('T -> T DIV F','T',3,'p_T_DIV_F','power_plus_minus_multiply_devide.py',39),
+  ('F -> F POWER G','F',3,'p_F_power_E','power_plus_minus_multiply_devide.py',45),
+  ('F -> G','F',1,'p_F_G','power_plus_minus_multiply_devide.py',50),
+  ('T -> F','T',1,'p_T_F','power_plus_minus_multiply_devide.py',54),
+  ('G -> NUMBER','G',1,'p_F_a','power_plus_minus_multiply_devide.py',58),
+  ('G -> LPAR E RPAR','G',3,'p_F_lpar_E_rpar','power_plus_minus_multiply_devide.py',62),
 ]
