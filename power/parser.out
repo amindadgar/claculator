@@ -1,0 +1,256 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> E
+Rule 2     E -> E PLUS T
+Rule 3     E -> E MINUS T
+Rule 4     E -> T
+Rule 5     T -> T MUL F
+Rule 6     T -> T DIV F
+Rule 7     T -> F
+Rule 8     F -> NUMBER
+Rule 9     F -> LPAR E RPAR
+
+Terminals, with rules where they appear
+
+DIV                  : 6
+LPAR                 : 9
+MINUS                : 3
+MUL                  : 5
+NUMBER               : 8
+PLUS                 : 2
+RPAR                 : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+E                    : 1 2 3 9
+F                    : 5 6 7
+S                    : 0
+T                    : 2 3 4 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . E
+    (2) E -> . E PLUS T
+    (3) E -> . E MINUS T
+    (4) E -> . T
+    (5) T -> . T MUL F
+    (6) T -> . T DIV F
+    (7) T -> . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    S                              shift and go to state 1
+    E                              shift and go to state 2
+    T                              shift and go to state 3
+    F                              shift and go to state 4
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> E .
+    (2) E -> E . PLUS T
+    (3) E -> E . MINUS T
+
+    $end            reduce using rule 1 (S -> E .)
+    PLUS            shift and go to state 7
+    MINUS           shift and go to state 8
+
+
+state 3
+
+    (4) E -> T .
+    (5) T -> T . MUL F
+    (6) T -> T . DIV F
+
+    PLUS            reduce using rule 4 (E -> T .)
+    MINUS           reduce using rule 4 (E -> T .)
+    $end            reduce using rule 4 (E -> T .)
+    RPAR            reduce using rule 4 (E -> T .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 4
+
+    (7) T -> F .
+
+    MUL             reduce using rule 7 (T -> F .)
+    DIV             reduce using rule 7 (T -> F .)
+    PLUS            reduce using rule 7 (T -> F .)
+    MINUS           reduce using rule 7 (T -> F .)
+    $end            reduce using rule 7 (T -> F .)
+    RPAR            reduce using rule 7 (T -> F .)
+
+
+state 5
+
+    (8) F -> NUMBER .
+
+    MUL             reduce using rule 8 (F -> NUMBER .)
+    DIV             reduce using rule 8 (F -> NUMBER .)
+    PLUS            reduce using rule 8 (F -> NUMBER .)
+    MINUS           reduce using rule 8 (F -> NUMBER .)
+    $end            reduce using rule 8 (F -> NUMBER .)
+    RPAR            reduce using rule 8 (F -> NUMBER .)
+
+
+state 6
+
+    (9) F -> LPAR . E RPAR
+    (2) E -> . E PLUS T
+    (3) E -> . E MINUS T
+    (4) E -> . T
+    (5) T -> . T MUL F
+    (6) T -> . T DIV F
+    (7) T -> . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    E                              shift and go to state 11
+    T                              shift and go to state 3
+    F                              shift and go to state 4
+
+state 7
+
+    (2) E -> E PLUS . T
+    (5) T -> . T MUL F
+    (6) T -> . T DIV F
+    (7) T -> . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    T                              shift and go to state 12
+    F                              shift and go to state 4
+
+state 8
+
+    (3) E -> E MINUS . T
+    (5) T -> . T MUL F
+    (6) T -> . T DIV F
+    (7) T -> . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    T                              shift and go to state 13
+    F                              shift and go to state 4
+
+state 9
+
+    (5) T -> T MUL . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    F                              shift and go to state 14
+
+state 10
+
+    (6) T -> T DIV . F
+    (8) F -> . NUMBER
+    (9) F -> . LPAR E RPAR
+
+    NUMBER          shift and go to state 5
+    LPAR            shift and go to state 6
+
+    F                              shift and go to state 15
+
+state 11
+
+    (9) F -> LPAR E . RPAR
+    (2) E -> E . PLUS T
+    (3) E -> E . MINUS T
+
+    RPAR            shift and go to state 16
+    PLUS            shift and go to state 7
+    MINUS           shift and go to state 8
+
+
+state 12
+
+    (2) E -> E PLUS T .
+    (5) T -> T . MUL F
+    (6) T -> T . DIV F
+
+    PLUS            reduce using rule 2 (E -> E PLUS T .)
+    MINUS           reduce using rule 2 (E -> E PLUS T .)
+    $end            reduce using rule 2 (E -> E PLUS T .)
+    RPAR            reduce using rule 2 (E -> E PLUS T .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 13
+
+    (3) E -> E MINUS T .
+    (5) T -> T . MUL F
+    (6) T -> T . DIV F
+
+    PLUS            reduce using rule 3 (E -> E MINUS T .)
+    MINUS           reduce using rule 3 (E -> E MINUS T .)
+    $end            reduce using rule 3 (E -> E MINUS T .)
+    RPAR            reduce using rule 3 (E -> E MINUS T .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 14
+
+    (5) T -> T MUL F .
+
+    MUL             reduce using rule 5 (T -> T MUL F .)
+    DIV             reduce using rule 5 (T -> T MUL F .)
+    PLUS            reduce using rule 5 (T -> T MUL F .)
+    MINUS           reduce using rule 5 (T -> T MUL F .)
+    $end            reduce using rule 5 (T -> T MUL F .)
+    RPAR            reduce using rule 5 (T -> T MUL F .)
+
+
+state 15
+
+    (6) T -> T DIV F .
+
+    MUL             reduce using rule 6 (T -> T DIV F .)
+    DIV             reduce using rule 6 (T -> T DIV F .)
+    PLUS            reduce using rule 6 (T -> T DIV F .)
+    MINUS           reduce using rule 6 (T -> T DIV F .)
+    $end            reduce using rule 6 (T -> T DIV F .)
+    RPAR            reduce using rule 6 (T -> T DIV F .)
+
+
+state 16
+
+    (9) F -> LPAR E RPAR .
+
+    MUL             reduce using rule 9 (F -> LPAR E RPAR .)
+    DIV             reduce using rule 9 (F -> LPAR E RPAR .)
+    PLUS            reduce using rule 9 (F -> LPAR E RPAR .)
+    MINUS           reduce using rule 9 (F -> LPAR E RPAR .)
+    $end            reduce using rule 9 (F -> LPAR E RPAR .)
+    RPAR            reduce using rule 9 (F -> LPAR E RPAR .)
+
