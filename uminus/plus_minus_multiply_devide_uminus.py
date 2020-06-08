@@ -26,7 +26,7 @@ def p_E_MINUS_T(p):
   p[0] = p[1] - p[3]
   print('E → E - T :', 'E: ',p[0], ' \t E1: ', p[1], '\t T: ', p[3])
 
-def p_MINUS_E_plus_T(p):
+'''def p_MINUS_E_plus_T(p):
     'E : MINUS E PLUS T' # E → - E + T
     p[0] = -1 * p[2] + p[4]
     print('E → - E + T',p[0],'\t E: ',p[2],'\t T: ',p[4])
@@ -35,6 +35,7 @@ def p_MINUS_E_MINUS_T(p):
     'E : MINUS E MINUS T' # E → - E - T
     p[0] = -1 * p[2] - p[4]
     print('E → - E - T',p[0],'\t E: ',p[2],'\t T: ',p[4])
+'''
 def p_E_T(p):
   'E : T' # E → T
   p[0]=p[1]
@@ -43,15 +44,36 @@ def p_T_MUL_F(p):
   'T : T MUL F' # T → T * F
   p[0] = p[1] * p[3]
   print('T → T * F :', 'T: ',p[0], ' \t T1: ', p[1], '\t F: ', p[3])
+'''
+def p_T_MUL_MINUS_F(p):
+    'T : T MUL MINUS F' # T → T * - F
+    p[0] = p[1] * (-1*p[4])
+    print('T → T * - F :', 'T: ',p[0], ' \t T1: ', p[1], '\t F: ', p[4])
+'''
 def p_T_DIV_F(p):
   'T : T DIV F' # T → T / F
   if p[3] != 0:  p[0] = p[1] / p[3]
   else: print('Error: Divide by zero '); p[0]=p[1]
   print('T → T / F :', 'T: ',p[0], ' \t T1: ', p[1], '\t F: ', p[3])
+'''
+def p_T_DIV_MINUS_F(p):
+    'T : T DIV MINUS F' # T → T / - F
+    if p[4] != 0:  p[0] = p[1] / (-1 *p[4])
+    else: print('Error: Divide by zero '); p[0]=p[1]
+    print('T → T / - F :', 'T: ',p[0], ' \t T1: ', p[1], '\t F: ', p[4])
+'''
 def p_T_F(p):
   'T : F' # T → F
   p[0]=p[1]
   print('T → F :', p[1])
+
+def p_F_MINUS_a(p):
+    'F : MINUS NUMBER' # F → - a
+    p[0]= p[2] * -1
+    print('F → - a :', p[2])
+
+
+
 def p_F_a(p):
   'F : NUMBER' # F → a
   p[0]=p[1]
@@ -60,6 +82,7 @@ def p_F_lpar_E_rpar(p):
   'F : LPAR E RPAR' # F → ( E )
   p[0]=p[2]
   print('F → (E) :', p[0])
+
 def p_error(p):
   print("Syntax error at '%s'" % p)
 import ply.yacc as yacc; yacc.yacc()
