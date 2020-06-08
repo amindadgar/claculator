@@ -42,9 +42,9 @@ def p_T_DIV_F(p):
   print('T → T / F :', 'T: ',p[0], ' \t T1: ', p[1], '\t F: ', p[3])
 
 def p_F_power_E(p):
-    'F : F POWER G' # F → F ^ G
+    'F : G POWER F ' # F → G ^ F
     p[0] = p[1] ** p[3]
-    print('F → F ^ G: ',p[0])
+    print('F → G ^ F: ',p[0])
 
 def p_F_G(p):
     'F : G' # F → G

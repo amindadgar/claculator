@@ -16,7 +16,7 @@ T → T / F
 
 T → F 
 
-F → F ^ G
+F → G ^ F
 
 F → G
 

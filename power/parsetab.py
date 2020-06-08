@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'DIV LPAR MINUS MUL NUMBER PLUS POWER RPARS : EE : E PLUS TE : E MINUS TE : TT : T MUL FT : T DIV FF : F POWER GF : GT : FG : NUMBERG : LPAR E RPAR'
+_lr_signature = 'DIV LPAR MINUS MUL NUMBER PLUS POWER RPARS : EE : E PLUS TE : E MINUS TE : TT : T MUL FT : T DIV FF : G POWER F F : GT : FG : NUMBERG : LPAR E RPAR'
     
-_lr_action_items = {'NUMBER':([0,7,8,9,10,11,12,],[6,6,6,6,6,6,6,]),'LPAR':([0,7,8,9,10,11,12,],[7,7,7,7,7,7,7,]),'$end':([1,2,3,4,5,6,14,15,16,17,18,19,],[0,-1,-4,-9,-8,-10,-2,-3,-5,-6,-7,-11,]),'PLUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[8,-4,-9,-8,-10,8,-2,-3,-5,-6,-7,-11,]),'MINUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[9,-4,-9,-8,-10,9,-2,-3,-5,-6,-7,-11,]),'RPAR':([3,4,5,6,13,14,15,16,17,18,19,],[-4,-9,-8,-10,19,-2,-3,-5,-6,-7,-11,]),'MUL':([3,4,5,6,14,15,16,17,18,19,],[10,-9,-8,-10,10,10,-5,-6,-7,-11,]),'DIV':([3,4,5,6,14,15,16,17,18,19,],[11,-9,-8,-10,11,11,-5,-6,-7,-11,]),'POWER':([4,5,6,16,17,18,19,],[12,-8,-10,12,12,-7,-11,]),}
+_lr_action_items = {'NUMBER':([0,7,8,9,10,11,12,],[6,6,6,6,6,6,6,]),'LPAR':([0,7,8,9,10,11,12,],[7,7,7,7,7,7,7,]),'$end':([1,2,3,4,5,6,14,15,16,17,18,19,],[0,-1,-4,-9,-8,-10,-2,-3,-5,-6,-7,-11,]),'PLUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[8,-4,-9,-8,-10,8,-2,-3,-5,-6,-7,-11,]),'MINUS':([2,3,4,5,6,13,14,15,16,17,18,19,],[9,-4,-9,-8,-10,9,-2,-3,-5,-6,-7,-11,]),'RPAR':([3,4,5,6,13,14,15,16,17,18,19,],[-4,-9,-8,-10,19,-2,-3,-5,-6,-7,-11,]),'MUL':([3,4,5,6,14,15,16,17,18,19,],[10,-9,-8,-10,10,10,-5,-6,-7,-11,]),'DIV':([3,4,5,6,14,15,16,17,18,19,],[11,-9,-8,-10,11,11,-5,-6,-7,-11,]),'POWER':([5,6,19,],[12,-10,-11,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'S':([0,],[1,]),'E':([0,7,],[2,13,]),'T':([0,7,8,9,],[3,3,14,15,]),'F':([0,7,8,9,10,11,],[4,4,4,4,16,17,]),'G':([0,7,8,9,10,11,12,],[5,5,5,5,5,5,18,]),}
+_lr_goto_items = {'S':([0,],[1,]),'E':([0,7,],[2,13,]),'T':([0,7,8,9,],[3,3,14,15,]),'F':([0,7,8,9,10,11,12,],[4,4,4,4,16,17,18,]),'G':([0,7,8,9,10,11,12,],[5,5,5,5,5,5,5,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -33,7 +33,7 @@ _lr_productions = [
   ('E -> T','E',1,'p_E_T','power_plus_minus_multiply_devide.py',31),
   ('T -> T MUL F','T',3,'p_T_MUL_F','power_plus_minus_multiply_devide.py',35),
   ('T -> T DIV F','T',3,'p_T_DIV_F','power_plus_minus_multiply_devide.py',39),
-  ('F -> F POWER G','F',3,'p_F_power_E','power_plus_minus_multiply_devide.py',45),
+  ('F -> G POWER F','F',3,'p_F_power_E','power_plus_minus_multiply_devide.py',45),
   ('F -> G','F',1,'p_F_G','power_plus_minus_multiply_devide.py',50),
   ('T -> F','T',1,'p_T_F','power_plus_minus_multiply_devide.py',54),
   ('G -> NUMBER','G',1,'p_F_a','power_plus_minus_multiply_devide.py',58),
