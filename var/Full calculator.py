@@ -1,4 +1,4 @@
-tokens = ('NUMBER','PLUS', 'MINUS', 'MUL', 'DIV', 'LPAR', 'RPAR','POWER')
+tokens = ('ASSIGN','NAME','NUMBER','PLUS', 'MINUS', 'MUL', 'DIV', 'LPAR', 'RPAR','POWER')
 t_PLUS     = r'\+'
 t_MINUS    = r'\-'
 t_MUL    = r'\*'
@@ -6,6 +6,8 @@ t_DIV    = r'/'
 t_LPAR    = r'\('
 t_RPAR    = r'\)'
 t_POWER = r'\^'
+t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]\*'
+t_ASSIGN = r'\='
 def t_NUMBER(t):
   r'[0-9]+'
   t.value = int(t.value)
@@ -14,9 +16,20 @@ t_ignore = " \t"
 def t_error(t):
   print("Illegal character '%s'" % t.value[0])
   t.lexer.skip(1)
-import ply.lex as lex;lex.lex()
+import ply.lex as lex
+lex.lex()
+def p_ASSIGN_S(p):
+      'U : NAME ASSIGN S'
+      p[0] = p[3]
+     # print(p[1])     ERROR!!!!!!!!!!!!!!!!!!!!
+
+'''def p_NAME(p):
+  'NAME'
+  print(p[0].values)
+  '''
 def p_S(p):
   'S : E' # S → E
+  p[0] = p[1]
   print('S → E ', p[1])
 def p_E_plus_T(p):
   'E : E PLUS T' # E → E + T
