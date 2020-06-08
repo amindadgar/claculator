@@ -25,6 +25,16 @@ def p_E_MINUS_T(p):
   'E : E MINUS T' # E → E - T
   p[0] = p[1] - p[3]
   print('E → E - T :', 'E: ',p[0], ' \t E1: ', p[1], '\t T: ', p[3])
+
+def p_MINUS_E_plus_T(p):
+    'E : MINUS E PLUS T' # E → - E + T
+    p[0] = -1 * p[2] + p[4]
+    print('E → - E + T',p[0],'\t E: ',p[2],'\t T: ',p[4])
+
+def p_MINUS_E_MINUS_T(p):
+    'E : MINUS E MINUS T' # E → - E - T
+    p[0] = -1 * p[2] - p[4]
+    print('E → - E + T',p[0],'\t E: ',p[2],'\t T: ',p[4])
 def p_E_T(p):
   'E : T' # E → T
   p[0]=p[1]
