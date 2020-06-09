@@ -6,12 +6,13 @@ t_DIV    = r'/'
 t_LPAR    = r'\('
 t_RPAR    = r'\)'
 t_POWER = r'\^'
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]\*'
+t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_ASSIGN = r'\='
 def t_NUMBER(t):
   r'[0-9]+'
   t.value = int(t.value)
   return t
+
 t_ignore = " \t"
 def t_error(t):
   print("Illegal character '%s'" % t.value[0])
@@ -21,7 +22,7 @@ lex.lex()
 def p_ASSIGN_S(p):
       'U : NAME ASSIGN S'
       p[0] = p[3]
-     # print(p[1])     ERROR!!!!!!!!!!!!!!!!!!!!
+      print(p[1]) #     ERROR!!!!!!!!!!!!!!!!!!!!
 
 '''def p_NAME(p):
   'NAME'
