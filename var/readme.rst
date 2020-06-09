@@ -4,6 +4,10 @@ uminus Grammer
 
 S → E
 
+S → U
+
+U → NAME = E
+
 E → E + T
 
 E → E - T
@@ -16,8 +20,10 @@ T → T / F
 
 T → F 
 
-F → a ^ F
+F → A ^ F
 
-F → - a
+A → NAME
 
-F → ( E )
+A → - a
+
+A → ( E )

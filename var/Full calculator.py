@@ -6,7 +6,6 @@ t_DIV    = r'/'
 t_LPAR    = r'\('
 t_RPAR    = r'\)'
 t_POWER = r'\^'
-#t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_ASSIGN = r'\='
 def t_NUMBER(t):
   r'[0-9]+'
@@ -22,18 +21,20 @@ def t_error(t):
 import ply.lex as lex
 lex.lex()
 vars = {}
+
+def p_S_U(p):
+      'S : U' # S → U
+      p[0] = p[1]
+
 def p_ASSIGN_S(p):
       'U : NAME ASSIGN E'  # U → NAME = E
       vars[p[1]] = p[3]
       print('U → NAME = E : ',p[1]," = ",p[3])
       
-def p_S_U(p):
-      'S : U' # S → U
-      p[0] = p[1]
 def p_F_NAME(p):
-      'F : NAME' # F → NAME
+      'A : NAME' # A → NAME
       p[0] = vars[p[1]]
-      print("F → NAME : ",p[1] ," = ", p[0])
+      print("A → NAME : ",p[1] ," = ", p[0])
 def p_S(p):
   'S : E' # S → E
   p[0] = p[1]
@@ -68,21 +69,26 @@ def p_T_F(p):
   print('T → F :', p[1])
 
 def p_F_MINUS_a(p):
-    'F : MINUS NUMBER' # F → - a
+    'A : MINUS NUMBER' # A → - a
     p[0]= p[2] * -1
-    print('F → - a :', p[2])
+    print('A → - a :', p[2])
 
 def p_F_power_E(p):
-    'F : NUMBER POWER F ' # F → a ^ F
+    'F : F POWER A ' # F → F ^ A
     p[0] = p[1] ** p[3]
-    print('F → G ^ F: ',p[0])
+    print('F → F ^ A : ',p[0])
+
+def p_F_A(p):
+    'F : A ' # F → A
+    p[0] = p[1]
+    print('F → A : ',p[0])
 
 def p_F_a(p):
-  'F : NUMBER' # F → a
+  'A : NUMBER' # A → a
   p[0]=p[1]
-  print('F → a :', p[1])
+  print('A → a :', p[1])
 def p_F_lpar_E_rpar(p):
-  'F : LPAR E RPAR' # F → ( E )
+  'A : LPAR E RPAR' # A → ( E )
   p[0]=p[2]
   print('F → (E) :', p[0])
 
