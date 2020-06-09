@@ -6,28 +6,34 @@ t_DIV    = r'/'
 t_LPAR    = r'\('
 t_RPAR    = r'\)'
 t_POWER = r'\^'
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+#t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_ASSIGN = r'\='
 def t_NUMBER(t):
   r'[0-9]+'
   t.value = int(t.value)
   return t
-
+def t_NAME(t):
+  r'[a-zA-Z_][a-zA-Z0-9_]*'
+  return t
 t_ignore = " \t"
 def t_error(t):
   print("Illegal character '%s'" % t.value[0])
   t.lexer.skip(1)
 import ply.lex as lex
 lex.lex()
+vars = {}
 def p_ASSIGN_S(p):
-      'U : NAME ASSIGN S'
-      p[0] = p[3]
-      print(p[1]) #     ERROR!!!!!!!!!!!!!!!!!!!!
-
-'''def p_NAME(p):
-  'NAME'
-  print(p[0].values)
-  '''
+      'U : NAME ASSIGN E'  # U → NAME = E
+      vars[p[1]] = p[3]
+      print('U → NAME = E : ',p[1]," = ",p[3])
+      
+def p_S_U(p):
+      'S : U' # S → U
+      p[0] = p[1]
+def p_F_NAME(p):
+      'F : NAME' # F → NAME
+      p[0] = vars[p[1]]
+      print("F → NAME : ",p[1] ," = ", p[0])
 def p_S(p):
   'S : E' # S → E
   p[0] = p[1]
